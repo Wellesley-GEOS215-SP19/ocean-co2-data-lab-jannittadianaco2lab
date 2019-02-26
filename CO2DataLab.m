@@ -79,7 +79,12 @@ title('June Sea Surface Temperature (^oC)')
 
 PCO2mean = nanmean(PCO2_SW,3)
 
-
+figure(1); clf
+worldmap world
+contourfm(latgrid, longrid, PCO2mean,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Annual Mean pCO2')
 
 %% 5. Calculate and plot a global map of the difference between the annual mean seawater and atmosphere pCO2
 %<--
