@@ -67,7 +67,7 @@ title('January Sea Surface Temperature (^oC)')
 %and/or for pCO2 using this approach. Check the documentation and see
 %whether you can modify features of this map such as the contouring
 %interval, color of the contour lines, labels, etc.
-
+%June
 figure(2); clf
 worldmap world
 contourfm(latgrid, longrid, PCO2_SW(:,:,6),'linecolor','none');
@@ -77,7 +77,7 @@ title('June Sea Surface Temperature (^oC)')
 
 %% 4. Calculate and plot a global map of annual mean pCO2
 
-PCO2mean = nanmean(PCO2_SW,3)
+PCO2mean = nanmean(PCO2_SW,3);
 
 figure(1); clf
 worldmap world
@@ -87,7 +87,19 @@ geoshow('landareas.shp','FaceColor','black')
 title('Annual Mean pCO2')
 
 %% 5. Calculate and plot a global map of the difference between the annual mean seawater and atmosphere pCO2
-%<--
+%Reference year: 2000
+%Link for Annual Mean of 2000: https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html?fbclid=IwAR0XJxcZWeFv4hX9TvzgXD-ZqZHZDl5HtmjGMkMzeAyTQoKwQzUns-fYR1Y
+% Mean Atmospheric pCO2 for 2000: 368.84
+
+At_pCO2mean = 368.84
+difference = PCO2mean - At_pCO2mean
+
+figure(1); clf
+worldmap world
+contourfm(latgrid, longrid, difference,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Difference between the Annual Mean Seawater pCO2 and Mean Atmospheric pCO2 in 2000')
 
 %% 6. Calculate relative roles of temperature and of biology/physics in controlling seasonal cycle
 %<--
