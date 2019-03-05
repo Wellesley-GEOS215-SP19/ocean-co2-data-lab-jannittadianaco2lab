@@ -1,5 +1,5 @@
 %% Add your names in a comment here at the beginning of the code!
-%% Diana Hernandez & Jannitta Yao
+% Diana Hernandez & Jannitta Yao
 % Instructions: Follow through this code step by step, while also referring
 % to the overall instructions and questions from the lab assignment sheet.
 
