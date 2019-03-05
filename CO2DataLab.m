@@ -102,13 +102,29 @@ geoshow('landareas.shp','FaceColor','black')
 title('Difference between the Annual Mean Seawater pCO2 and Mean Atmospheric pCO2 in 2000')
 
 %% 6. Calculate relative roles of temperature and of biology/physics in controlling seasonal cycle
-%<--
+
+tempMean = mean(SST,3);
+SST_annual_mean = repmat(tempMean, 1, 1, 12);
+
+PCO2_annual_mean = repmat(PCO2mean, 1, 1, 12);
+
+
+pCO2_T = PCO2_SW .* exp(0.0423*(SST_annual_mean - SST));
+
+pCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean)); 
 
 %% 7. Pull out and plot the seasonal cycle data from stations of interest
 %Do for BATS, Station P, and Ross Sea (note that Ross Sea is along a
 %section of 14 degrees longitude - I picked the middle point)
 
-%<--
+%Lat = N or S
+%Lon = E or W
+
+%BATS = 32 degrees 50 min N and 64 degrees 10 min W
+%P = = 50 degrees N and 145 degrees W
+%Ross = 76.5 degrees S and 169-177 degrees W
+
+
 
 %% 8. Reproduce your own versions of the maps in figures 7-9 in Takahashi et al. 2002
 % But please use better colormaps!!!

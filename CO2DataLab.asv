@@ -1,5 +1,5 @@
 %% Add your names in a comment here at the beginning of the code!
-%% Diana Hernandez & Jannitta Yao
+% Diana Hernandez & Jannitta Yao
 % Instructions: Follow through this code step by step, while also referring
 % to the overall instructions and questions from the lab assignment sheet.
 
@@ -92,10 +92,26 @@ title('Annual Mean pCO2')
 % Mean Atmospheric pCO2 for 2000: 368.84
 
 At_pCO2mean = 368.84
-difference = PCO2mean -
+difference = PCO2mean - At_pCO2mean
+
+figure(1); clf
+worldmap world
+contourfm(latgrid, longrid, difference,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Difference between the Annual Mean Seawater pCO2 and Mean Atmospheric pCO2 in 2000')
 
 %% 6. Calculate relative roles of temperature and of biology/physics in controlling seasonal cycle
-%<--
+
+tempMean = mean(SST,3);
+SST_annual_mean = repmat(tempMean, 1, 1, 12)
+
+PCO2_annual_mean = repmat(PCO2mean, 1, 1, 12)
+
+
+pCO2_T = PCO2_SW .* exp(0.0423*(tempMean - SST));
+
+pCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - tempMean)); 
 
 %% 7. Pull out and plot the seasonal cycle data from stations of interest
 %Do for BATS, Station P, and Ross Sea (note that Ross Sea is along a
