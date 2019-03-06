@@ -109,9 +109,9 @@ SST_annual_mean = repmat(tempMean, 1, 1, 12);
 PCO2_annual_mean = repmat(PCO2mean, 1, 1, 12);
 
 
-pCO2_T = PCO2_SW .* exp(0.0423*(SST_annual_mean - SST));
+PCO2_T = PCO2_SW .* exp(0.0423*(SST_annual_mean - SST));
 
-pCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean)); 
+PCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean)); 
 
 %% 7. Pull out and plot the seasonal cycle data from stations of interest
 %Do for BATS, Station P, and Ross Sea (note that Ross Sea is along a
@@ -119,12 +119,140 @@ pCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean));
 
 %Lat = N or S
 %Lon = E or W
+% W or S means add a negative to the degrees and add 360
 
 %BATS = 32 degrees 50 min N and 64 degrees 10 min W
 %P = = 50 degrees N and 145 degrees W
-%Ross = 76.5 degrees S and 169-177 degrees W
+%Ross = 76.5 degrees S and 169 degrees E
+
+%-----------------BATS Station-------------------------
+B_lat = 32.5;
+B_lon = -64.1 + 360;
+
+B_lat_diff = abs(latgrid - B_lat);
+B_lat_index = find(B_lat_diff == min(B_lat_diff));
+latgrid(B_lat_index);
+
+B_lon_diff = abs(longrid - B_lon);
+B_lon_index = find(B_lon_diff == min(B_lon_diff));
+longrid(B_lon_index);
+
+B_SST = squeeze(SST(B_lat_index, B_lon_index, :));
+B_PCO2 = squeeze(PCO2_SW(B_lat_index, B_lon_index, :));
+B_PCO2_T = squeeze(PCO2_T(B_lat_index, B_lon_index, :));
+B_PCO2_BP = squeeze(PCO2_BP(B_lat_index, B_lon_index, :));
 
 
+figure (1); clf
+subplot(2,2,1)
+plot(monthgrid, B_SST)
+title('Sea Surface Temperature at BATS');
+xlabel('Months')
+ylabel('Temperature (C)')
+
+subplot(2,2,2)
+plot( monthgrid, B_PCO2)
+title('PCO2 at BATS')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,3)
+plot( monthgrid, B_PCO2_T)
+title('Temperature Effect on PCO2 at BATS')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,4)
+plot( monthgrid, B_PCO2_BP)
+title('Bio-physical Effect on PCO2 at BATS')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+%-----------------Papa Station------------------------
+P_lat = 50;
+P_lon = -145 + 360;
+
+P_lat_diff = abs(latgrid - P_lat);
+P_lat_index = find(P_lat_diff == min(P_lat_diff));
+latgrid(P_lat_index);
+
+P_lon_diff = abs(longrid - P_lon);
+P_lon_index = find(P_lon_diff == min(P_lon_diff));
+longrid(P_lon_index);
+
+P_SST = squeeze(SST(P_lat_index(1), P_lon_index, :));
+P_PCO2 = squeeze(PCO2_SW(P_lat_index(1), P_lon_index, :));
+P_PCO2_T = squeeze(PCO2_T(P_lat_index(1), P_lon_index, :));
+P_PCO2_BP = squeeze(PCO2_BP(P_lat_index(1), P_lon_index, :));
+
+
+figure (2); clf
+subplot(2,2,1)
+plot(monthgrid, P_SST)
+title('Sea Surface Temperature at Station Papa');
+xlabel('Months')
+ylabel('Temperature (C)')
+
+subplot(2,2,2)
+plot( monthgrid, P_PCO2)
+title('PCO2 at Station Papa')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,3)
+plot( monthgrid, P_PCO2_T)
+title('Temperature Effect on PCO2 at Station Papa')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,4)
+plot( monthgrid, P_PCO2_BP)
+title('Bio-physical Effect on PCO2 at Station Papa')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+%---------------------Ross--------------------------
+
+R_lat = -76.5;
+R_lon = ((169 - 177 + 360)/2);
+
+R_lat_diff = abs(latgrid - R_lat);
+R_lat_index = find(R_lat_diff == min(R_lat_diff));
+latgrid(R_lat_index);
+
+R_lon_diff = abs(longrid - R_lon);
+R_lon_index = find(R_lon_diff == min(R_lon_diff));
+longrid(R_lon_index);
+
+R_SST = squeeze(SST(R_lat_index, R_lon_index, :));
+R_PCO2 = squeeze(PCO2_SW(R_lat_index, R_lon_index, :));
+R_PCO2_T = squeeze(PCO2_T(R_lat_index, R_lon_index, :));
+R_PCO2_BP = squeeze(PCO2_BP(R_lat_index, R_lon_index, :));
+
+
+figure (3); clf
+subplot(2,2,1)
+plot(monthgrid, R_SST)
+title('Sea Surface Temperature at the Ross Sea');
+xlabel('Months')
+ylabel('Temperature (C)')
+
+subplot(2,2,2)
+plot( monthgrid, R_PCO2)
+title('PCO2 at the Ross Sea')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,3)
+plot( monthgrid, R_PCO2_T)
+title('Temperature Effect on PCO2 at the Ross Sea')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
+
+subplot(2,2,4)
+plot( monthgrid, R_PCO2_BP)
+title('Bio-physical Effect on PCO2 at the Ross Sea')
+xlabel('Months')
+ylabel('PCO2 (ppm)')
 
 %% 8. Reproduce your own versions of the maps in figures 7-9 in Takahashi et al. 2002
 % But please use better colormaps!!!
