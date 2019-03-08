@@ -91,8 +91,8 @@ title('Annual Mean pCO2')
 %Link for Annual Mean of 2000: https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html?fbclid=IwAR0XJxcZWeFv4hX9TvzgXD-ZqZHZDl5HtmjGMkMzeAyTQoKwQzUns-fYR1Y
 % Mean Atmospheric pCO2 for 2000: 368.84
 
-At_pCO2mean = 368.84
-difference = PCO2mean - At_pCO2mean
+At_pCO2mean = 368.84;
+difference = PCO2mean - At_pCO2mean;
 
 figure(1); clf
 worldmap world
@@ -109,9 +109,9 @@ SST_annual_mean = repmat(tempMean, 1, 1, 12);
 PCO2_annual_mean = repmat(PCO2mean, 1, 1, 12);
 
 
-PCO2_T = PCO2_SW .* exp(0.0423*(SST_annual_mean - SST));
+PCO2_BP = PCO2_SW .* exp(0.0423*(SST_annual_mean - SST));
 
-PCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean)); 
+PCO2_T = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean)); 
 
 %% 7. Pull out and plot the seasonal cycle data from stations of interest
 %Do for BATS, Station P, and Ross Sea (note that Ross Sea is along a
@@ -259,4 +259,38 @@ ylabel('PCO2 (ppm)')
 % Mark on thesese maps the locations of the three stations for which you plotted the
 % seasonal cycle above
 
-%<--
+min_BP = min(PCO2_BP,[],3);
+max_BP = max(PCO2_BP,[],3);
+BP_amp = max_BP - min_BP;
+
+figure(1); clf
+worldmap world
+contourfm(latgrid, longrid, BP_amp,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Biophysical Effect')
+
+%------------------Temperature Effect---------------------------
+
+min_T = min(PCO2_T,[],3);
+max_T = max(PCO2_T,[],3);
+
+T_amp = max_T - min_T
+
+figure(2); clf
+worldmap world
+contourfm(latgrid, longrid, T_amp,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Temperature Effect')
+
+%---------------Temperature - Biophysical------------
+
+T_BP_diff = T_amp - BP_amp
+
+figure(3); clf
+worldmap world
+contourfm(latgrid, longrid, T_BP_diff,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Difference in Temperature and Biophysical Effect')

@@ -91,8 +91,8 @@ title('Annual Mean pCO2')
 %Link for Annual Mean of 2000: https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html?fbclid=IwAR0XJxcZWeFv4hX9TvzgXD-ZqZHZDl5HtmjGMkMzeAyTQoKwQzUns-fYR1Y
 % Mean Atmospheric pCO2 for 2000: 368.84
 
-At_pCO2mean = 368.84
-difference = PCO2mean - At_pCO2mean
+At_pCO2mean = 368.84;
+difference = PCO2mean - At_pCO2mean;
 
 figure(1); clf
 worldmap world
@@ -123,7 +123,7 @@ PCO2_BP = PCO2_annual_mean .* exp(0.0423*(SST - SST_annual_mean));
 
 %BATS = 32 degrees 50 min N and 64 degrees 10 min W
 %P = = 50 degrees N and 145 degrees W
-%Ross = 76.5 degrees S and 173 degrees W
+%Ross = 76.5 degrees S and 169 degrees E
 
 %-----------------BATS Station-------------------------
 B_lat = 32.5;
@@ -180,10 +180,10 @@ P_lon_diff = abs(longrid - P_lon);
 P_lon_index = find(P_lon_diff == min(P_lon_diff));
 longrid(P_lon_index);
 
-P_SST = squeeze(SST(P_lat_index(1), P_lon_index(1), :));
+P_SST = squeeze(SST(P_lat_index(1), P_lon_index, :));
 P_PCO2 = squeeze(PCO2_SW(P_lat_index(1), P_lon_index, :));
-P_PCO2_T = squeeze(PCO2_T(P_lat_index, P_lon_index, :));
-P_PCO2_BP = squeeze(PCO2_BP(P_lat_index, P_lon_index, :));
+P_PCO2_T = squeeze(PCO2_T(P_lat_index(1), P_lon_index, :));
+P_PCO2_BP = squeeze(PCO2_BP(P_lat_index(1), P_lon_index, :));
 
 
 figure (2); clf
@@ -212,8 +212,8 @@ xlabel('Months')
 ylabel('PCO2 (ppm)')
 %---------------------Ross--------------------------
 
-R_lat = -76.5 + 360;
-R_lon = -173 + 360;
+R_lat = -76.5;
+R_lon = ((169 - 177 + 360)/2);
 
 R_lat_diff = abs(latgrid - R_lat);
 R_lat_index = find(R_lat_diff == min(R_lat_diff));
@@ -259,4 +259,18 @@ ylabel('PCO2 (ppm)')
 % Mark on thesese maps the locations of the three stations for which you plotted the
 % seasonal cycle above
 
-%<--
+min_BP = min(PCO2_BP,[],3);
+max_BP = max(PCO2_BP,[],3);
+BP_amp = max_BP - min_BP;
+
+figure(1); clf
+worldmap world
+contourfm(latgrid, longrid, BP_amp,'linecolor','none');
+colorbar
+geoshow('landareas.shp','FaceColor','black')
+title('Bio-physical Effect (^oC)')
+
+%-----------------------%BP_plot = BP_amp - PCO2_BP
+
+min_T = min(PCO2_T,[],3);
+max_T = max(PCO2_T,[],3);
