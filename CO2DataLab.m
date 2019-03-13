@@ -73,7 +73,7 @@ worldmap world
 contourfm(latgrid, longrid, PCO2_SW(:,:,6),'linecolor','none');
 colorbar
 geoshow('landareas.shp','FaceColor','black')
-title('June Sea Surface Temperature (^oC)')
+title('June pCO2 of Seawater)')
 
 %% 4. Calculate and plot a global map of annual mean pCO2
 
