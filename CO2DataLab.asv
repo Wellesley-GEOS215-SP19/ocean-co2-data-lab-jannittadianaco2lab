@@ -270,31 +270,31 @@ longrid(A_lon_index);
 A_SST = squeeze(SST(A_lat_index, A_lon_index, :));
 A_PCO2 = squeeze(PCO2_SW(A_lat_index, A_lon_index, :));
 A_PCO2_T = squeeze(PCO2_T(A_lat_index, A_lon_index, :));
-A_PCO2_BP = squeeze(PCO2_BP(A_lat_index, A_lon_index, :));
+R_PCO2_BP = squeeze(PCO2_BP(R_lat_index, A_lon_index, :));
 
 
-figure (4); clf
+figure (3); clf
 subplot(2,2,1)
 plot(monthgrid, A_SST)
-title('Sea Surface Temperature at Station ALOHA');
+title('Sea Surface Temperature at the Ross Sea');
 xlabel('Months')
 ylabel('Temperature (C)')
 
 subplot(2,2,2)
 plot( monthgrid, A_PCO2)
-title('PCO2 at Station ALOHA')
+title('PCO2 at the Ross Sea')
 xlabel('Months')
 ylabel('PCO2 (ppm)')
 
 subplot(2,2,3)
 plot( monthgrid, A_PCO2_T)
-title('Temperature Effect on PCO2 at Station ALOHA')
+title('Temperature Effect on PCO2 at the Ross Sea')
 xlabel('Months')
 ylabel('PCO2 (ppm)')
 
 subplot(2,2,4)
-plot( monthgrid, A_PCO2_BP)
-title('Bio-physical Effect on PCO2 at Station ALOHA')
+plot( monthgrid, R_PCO2_BP)
+title('Bio-physical Effect on PCO2 at the Ross Sea')
 xlabel('Months')
 ylabel('PCO2 (ppm)')
 
