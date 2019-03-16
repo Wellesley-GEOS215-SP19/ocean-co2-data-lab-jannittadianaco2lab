@@ -153,21 +153,21 @@ ylabel('Temperature (C)')
 
 subplot(2,2,2)
 plot( monthgrid, B_PCO2)
-title('PCO2 at BATS')
+title('pCO2 at BATS')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,3)
 plot( monthgrid, B_PCO2_T)
-title('Temperature Effect on PCO2 at BATS')
+title('Temperature Effect on pCO2 at BATS')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,4)
 plot( monthgrid, B_PCO2_BP)
-title('Bio-physical Effect on PCO2 at BATS')
+title('Bio-physical Effect on pCO2 at BATS')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 %-----------------Papa Station------------------------
 P_lat = 50;
@@ -196,21 +196,21 @@ ylabel('Temperature (C)')
 
 subplot(2,2,2)
 plot( monthgrid, P_PCO2)
-title('PCO2 at Station Papa')
+title('pCO2 at Station Papa')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,3)
 plot( monthgrid, P_PCO2_T)
-title('Temperature Effect on PCO2 at Station Papa')
+title('Temperature Effect on pCO2 at Station Papa')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,4)
 plot( monthgrid, P_PCO2_BP)
-title('Bio-physical Effect on PCO2 at Station Papa')
+title('Bio-physical Effect on pCO2 at Station Papa')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 %---------------------Ross--------------------------
 
 R_lat = -76.5;
@@ -239,21 +239,21 @@ ylabel('Temperature (C)')
 
 subplot(2,2,2)
 plot( monthgrid, A_PCO2)
-title('PCO2 at the Ross Sea')
+title('pCO2 at the Ross Sea')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,3)
 plot( monthgrid, A_PCO2_T)
-title('Temperature Effect on PCO2 at the Ross Sea')
+title('Temperature Effect on pCO2 at the Ross Sea')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,4)
 plot( monthgrid, R_PCO2_BP)
-title('Bio-physical Effect on PCO2 at the Ross Sea')
+title('Bio-physical Effect on pCO2 at the Ross Sea')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 %------------------ALOHA--------------
 A_lat = 22.45;
@@ -282,21 +282,21 @@ ylabel('Temperature (C)')
 
 subplot(2,2,2)
 plot( monthgrid, A_PCO2)
-title('PCO2 at Station ALOHA')
+title('pCO2 at Station ALOHA')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,3)
 plot( monthgrid, A_PCO2_T)
-title('Temperature Effect on PCO2 at Station ALOHA')
+title('Temperature Effect on pCO2 at Station ALOHA')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 subplot(2,2,4)
 plot( monthgrid, A_PCO2_BP)
-title('Bio-physical Effect on PCO2 at Station ALOHA')
+title('Bio-physical Effect on pCO2 at Station ALOHA')
 xlabel('Months')
-ylabel('PCO2 (ppm)')
+ylabel('pCO2 (atm)')
 
 %% 8. Reproduce your own versions of the maps in figures 7-9 in Takahashi et al. 2002
 % But please use better colormaps!!!
